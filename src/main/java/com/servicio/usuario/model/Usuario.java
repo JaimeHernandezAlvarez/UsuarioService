@@ -1,7 +1,8 @@
 package com.servicio.usuario.model;
 
+import java.util.Set;
+
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +21,10 @@ public class Usuario {
     @Column(name = "nombre_usuario",length = 20)
     private String  nombre;
 
-    @Column(name = "id_animal")
-    private Integer id_animal;
-
     @Column(name = "tipo_usuario")
     private Integer id_tipoUsuario;
+
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL,orphanRemoval = true)
+    private Set<Animal> id_animal;
+
 }
