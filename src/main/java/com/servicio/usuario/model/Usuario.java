@@ -24,7 +24,7 @@ public class Usuario {
     @Column(name = "tipo_usuario")
     private Integer id_tipoUsuario;
 
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Animal> id_animal;
 
 }

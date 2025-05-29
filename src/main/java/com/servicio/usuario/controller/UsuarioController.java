@@ -59,7 +59,7 @@ public class UsuarioController {
             user.setId(id);
             user.setNombre(usuario.getNombre());
             user.setId_tipoUsuario(usuario.getId_tipoUsuario());
-            user.setId_animal(usuario.getId_animal());
+            user.setId_animal(user.getId_animal());
 
             usuarioService.save(user);
             return ResponseEntity.ok(usuario);
