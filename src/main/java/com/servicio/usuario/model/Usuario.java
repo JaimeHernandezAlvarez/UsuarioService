@@ -15,19 +15,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq")
+    @SequenceGenerator(name = "usuario_seq", sequenceName = "SEQ_USUARIO", allocationSize = 1)
     @Column(name = "id_usuario")
     private Integer id;
 
-    @Column(name = "nombre_usuario",length = 20)
-    private String  nombre;
+    @Column(name = "nombre_usuario", length = 20)
+    private String nombre;
 
     @Column(name = "tipo_usuario")
     private Integer id_tipoUsuario;
 
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private Set<Animal> id_animal;
-
+    private Set<Animal> animales;
 }
