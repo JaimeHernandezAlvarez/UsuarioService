@@ -18,4 +18,8 @@ public class AnimalServiceClient {
     public Animal findById(String id){
         return restTemplate.getForObject(animalServiceUrl + "/" + id, Animal.class);
     }
+
+    public Animal save(Animal animal){
+        return restTemplate.postForObject(animalServiceUrl, animal, Animal.class);
+    }
 }

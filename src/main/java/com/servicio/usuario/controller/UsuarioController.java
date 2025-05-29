@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.servicio.usuario.model.Animal;
 import com.servicio.usuario.model.Usuario;
+import com.servicio.usuario.service.AnimalServiceClient;
 import com.servicio.usuario.service.UsuarioService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,13 +20,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
-
 @RestController
 @RequestMapping("/api/v1/usuarios")
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
+    private AnimalServiceClient animalService;
 
     @GetMapping
     public ResponseEntity<List<Usuario>> listar(){
@@ -38,13 +38,10 @@ public class UsuarioController {
 
     @PostMapping()
     public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario){
-        if(usuario.getId_animal() != null){
-            for(Animal animal : usuario.getId_animal()){
-                animal.setUsuario(usuario);
-            }
+        for(Animal animal : usuario.getId_animal()){
+            animalService.save(animal);
         }
         Usuario nuevo = usuarioService.save(usuario);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
