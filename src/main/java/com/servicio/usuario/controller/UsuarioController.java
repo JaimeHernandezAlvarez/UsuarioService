@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.servicio.usuario.model.Animal;
 import com.servicio.usuario.model.Usuario;
 import com.servicio.usuario.service.UsuarioService;
 
@@ -37,7 +38,13 @@ public class UsuarioController {
 
     @PostMapping()
     public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario){
+        if(usuario.getId_animal() != null){
+            for(Animal animal : usuario.getId_animal()){
+                animal.setUsuario(usuario);
+            }
+        }
         Usuario nuevo = usuarioService.save(usuario);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 

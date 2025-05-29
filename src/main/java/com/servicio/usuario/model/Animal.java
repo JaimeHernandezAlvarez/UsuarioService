@@ -1,5 +1,7 @@
 package com.servicio.usuario.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +31,7 @@ public class Animal {
     private String estado;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     private Usuario usuario;
 }

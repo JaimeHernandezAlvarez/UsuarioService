@@ -1,6 +1,9 @@
 package com.servicio.usuario.model;
 
+import java.util.HashSet;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,6 +28,7 @@ public class Usuario {
     private Integer id_tipoUsuario;
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Animal> id_animal;
 
 }
