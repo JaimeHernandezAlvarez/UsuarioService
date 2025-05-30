@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
     private AnimalServiceClient animalService;
 
     @GetMapping
@@ -38,10 +40,10 @@ public class UsuarioController {
 
     @PostMapping()
     public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario){
+        Usuario nuevo = usuarioService.save(usuario);
         for(Animal animal : usuario.getId_animal()){
             animalService.save(animal);
         }
-        Usuario nuevo = usuarioService.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
