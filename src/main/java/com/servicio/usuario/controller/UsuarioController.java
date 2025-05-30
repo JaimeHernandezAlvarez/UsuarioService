@@ -33,7 +33,7 @@ public class UsuarioController {
 
     @PostMapping()
     public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario){
-        for(Animal animal : usuario.getId_animal()){
+        for(Animal animal : usuario.getAnimales()){
             animalService.save(animal);
         }
         Usuario nuevo = usuarioService.save(usuario);
