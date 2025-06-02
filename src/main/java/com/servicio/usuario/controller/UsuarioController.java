@@ -9,18 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 import com.servicio.usuario.model.Animal;
 import com.servicio.usuario.model.Usuario;
-import com.servicio.usuario.service.AnimalServiceClient;
 import com.servicio.usuario.service.UsuarioService;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
 public class UsuarioController {
-
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private AnimalServiceClient animalService;
 
     @GetMapping
     public ResponseEntity<List<Usuario>> listar() {
