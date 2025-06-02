@@ -33,10 +33,12 @@ public class UsuarioController {
 
     @PostMapping()
     public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario){
-        for(Animal animal : usuario.getAnimales()){
-            animalService.save(animal);
-        }
         Usuario nuevo = usuarioService.save(usuario);
+        if(usuario.getAnimales() != null){
+            for(Animal animal : usuario.getAnimales()){
+                animal.setUsuario(nuevo);
+            }
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 

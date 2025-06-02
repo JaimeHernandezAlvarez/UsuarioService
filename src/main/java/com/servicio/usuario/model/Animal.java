@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Animal {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_seq")
+    @SequenceGenerator(name = "animal_seq",sequenceName = "ANIMALES_SEQ",allocationSize = 1)
     @Column(name = "id_animal")
     private Integer id;
 
@@ -31,7 +32,7 @@ public class Animal {
     private String estado;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @JsonBackReference
     private Usuario usuario;
 }
