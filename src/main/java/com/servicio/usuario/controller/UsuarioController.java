@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.servicio.usuario.model.Animal;
 import com.servicio.usuario.model.Usuario;
 import com.servicio.usuario.service.UsuarioService;
 
@@ -30,11 +29,6 @@ public class UsuarioController {
     @PostMapping()
     public ResponseEntity<Usuario> guardar(@RequestBody Usuario usuario){
         Usuario nuevo = usuarioService.save(usuario);
-        if(usuario.getAnimales() != null){
-            for(Animal animal : usuario.getAnimales()){
-                animal.setUsuario(nuevo);
-            }
-        }
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
@@ -53,16 +47,7 @@ public class UsuarioController {
         try {
             Usuario existente = usuarioService.findById(id);
             existente.setNombre(usuario.getNombre());
-            existente.setId_tipoUsuario(usuario.getId_tipoUsuario());
-
-            existente.getAnimales().clear();
-
-            if (usuario.getAnimales() != null) {
-                for (Animal animal : usuario.getAnimales()) {
-                    animal.setUsuario(existente);
-                    existente.getAnimales().add(animal);
-                }
-            }
+            existente.setContraseña(usuario.getContraseña());
 
             Usuario actualizado = usuarioService.save(existente);
             return ResponseEntity.ok(actualizado);

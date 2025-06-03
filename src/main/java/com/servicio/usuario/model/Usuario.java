@@ -1,10 +1,5 @@
 package com.servicio.usuario.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,10 +20,9 @@ public class Usuario {
     @Column(name = "nombre_usuario", length = 20)
     private String nombre;
 
-    @Column(name = "tipo_usuario")
-    private Integer id_tipoUsuario;
+    @Column(name = "contraseña")
+    private String contraseña;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Animal> animales = new ArrayList<>();
+    @Column(name = "id_propietario",nullable = false,unique = true)
+    private Long propietario;
 }
